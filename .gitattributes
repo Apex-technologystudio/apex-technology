@@ -1,0 +1,13 @@
+# Normalise line endings in the repo so Windows and CI agree on file contents.
+# Without this, every text file churns between LF and CRLF across machines.
+* text=auto eol=lf
+
+# Binary assets must never be line-ending converted.
+*.mp4 binary
+*.webm binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff binary
+*.woff2 binary

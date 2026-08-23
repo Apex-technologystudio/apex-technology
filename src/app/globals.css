@@ -1,0 +1,315 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   APEX TECHNOLOGY design tokens
+   Values are taken verbatim from APEX-Technology-Brand-Guidelines.docx v1.0.
+   The five brand hexes are exact; the -50..-900 ramps are derived tints used
+   for borders, hovers and surfaces, and must never override a brand value.
+--------------------------------------------------------------------------- */
+@theme {
+  /* Brand — exact */
+  --color-navy: #071a2e;
+  --color-cyan: #18b7e8;
+  --color-ink: #0d2036;
+  --color-mist: #eaf8fd;
+
+  /* Navy ramp — deeper shades for layered dark surfaces */
+  --color-navy-50: #f2f6fa;
+  --color-navy-100: #e3ebf3;
+  --color-navy-200: #c2d3e4;
+  --color-navy-300: #90aecb;
+  --color-navy-400: #5782ac;
+  --color-navy-500: #356291;
+  --color-navy-600: #264c76;
+  --color-navy-700: #1d3c5f;
+  --color-navy-800: #123252;
+  --color-navy-900: #0d2036;
+  --color-navy-950: #071a2e;
+
+  /* Cyan ramp — accent only, per the 10% rule */
+  --color-cyan-50: #eaf8fd;
+  --color-cyan-100: #d0f0fb;
+  --color-cyan-200: #a8e5f8;
+  --color-cyan-300: #6fd5f3;
+  --color-cyan-400: #34c3ec;
+  --color-cyan-500: #18b7e8;
+  --color-cyan-600: #0d8fbd;
+  --color-cyan-700: #0e7299;
+  --color-cyan-800: #135d7d;
+  --color-cyan-900: #154e69;
+
+  /* Type — Inter, with the guideline's Arial fallback */
+  --font-sans: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
+
+  /* Display sizes map to the guideline hierarchy (48-72px display) */
+  --text-display: clamp(2.5rem, 1.5rem + 4.2vw, 4.5rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.035em;
+
+  --text-h1: clamp(2rem, 1.3rem + 3vw, 3.25rem);
+  --text-h1--line-height: 1.08;
+  --text-h1--letter-spacing: -0.03em;
+
+  --text-h2: clamp(1.75rem, 1.25rem + 2vw, 2.5rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.022em;
+
+  --text-h3: clamp(1.25rem, 1.05rem + 0.8vw, 1.5rem);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.015em;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Header is sticky; anchor targets must clear it. */
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Brand rule: strong weight contrast, not decoration. */
+  h1, h2, h3, h4 {
+    font-weight: 800;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, on-brand focus ring for keyboard users on every surface. */
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-cyan);
+    color: var(--color-navy);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+--------------------------------------------------------------------------- */
+@utility container-apex {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+
+  @media (width >= 768px) {
+    padding-inline: 2rem;
+  }
+
+  @media (width >= 1280px) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Cyan-tinted grid, used behind dark sections at low opacity. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-cyan) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-cyan) 12%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ---------------------------------------------------------------------------
+   Animation
+   Every keyframe here is disabled wholesale by the reduced-motion block at the
+   end of this file, so individual components don't each need a guard.
+--------------------------------------------------------------------------- */
+@keyframes apex-draw {
+  from { stroke-dashoffset: var(--dash, 1000); }
+  to { stroke-dashoffset: 0; }
+}
+
+/*
+ * Animates opacity and transform only. The earlier version animated the SVG
+ * `r` attribute, which is a geometry property: changing it re-rasterises the
+ * entire full-viewport SVG every frame instead of staying on the compositor,
+ * and that was a measurable part of the hero stutter.
+ * `transform-box: fill-box` makes the transform origin the circle itself.
+ */
+@keyframes apex-pulse-node {
+  0%, 100% { opacity: 0.25; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.4); }
+}
+
+/* Travels a cyan packet along an SVG trace via offset-path. */
+@keyframes apex-flow {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
+@keyframes apex-scan {
+  0% { transform: translateY(0); opacity: 0; }
+  10%, 90% { opacity: 1; }
+  100% { transform: translateY(var(--scan-distance, 100px)); opacity: 0; }
+}
+
+@keyframes apex-shine {
+  from { transform: translateX(-120%) skewX(-18deg); }
+  to { transform: translateX(320%) skewX(-18deg); }
+}
+
+@keyframes apex-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ---------------------------------------------------------------------------
+   Embossed form fields
+   A pressed-into-the-surface look for the enquiry drawer. Neumorphism usually
+   fails accessibility, so this keeps a real 1px border and a full-contrast
+   focus ring rather than relying on shadow alone to convey the field edge.
+--------------------------------------------------------------------------- */
+@utility field-emboss {
+  background-image: linear-gradient(180deg, #eff7fc 0%, #ffffff 58%);
+  border: 1px solid color-mix(in oklab, var(--color-navy) 16%, transparent);
+  box-shadow:
+    inset 0 3px 6px color-mix(in oklab, var(--color-navy) 18%, transparent),
+    inset 0 1px 1px color-mix(in oklab, var(--color-navy) 10%, transparent),
+    inset 0 -1px 0 rgba(255, 255, 255, 1),
+    0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: box-shadow 0.2s var(--ease-out-expo), border-color 0.2s;
+}
+
+@utility field-emboss-focus {
+  border-color: var(--color-cyan);
+  box-shadow:
+    inset 0 2px 5px color-mix(in oklab, var(--color-navy) 8%, transparent),
+    0 0 0 3px color-mix(in oklab, var(--color-cyan) 28%, transparent);
+}
+
+/* Raised counterpart, for the drawer's own surface. */
+@utility panel-emboss {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 -1px 0 color-mix(in oklab, var(--color-navy) 6%, transparent) inset,
+    0 24px 60px -24px color-mix(in oklab, var(--color-navy) 55%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Glass — bottom navigation and floating surfaces
+--------------------------------------------------------------------------- */
+@utility glass-navy {
+  /* 88%, not 72%. At lower opacity the page scrolling underneath stayed fully
+     legible through the bar and collided with the nav labels. The heavy blur
+     plus saturation is what still reads as glass at this opacity. */
+  background-color: color-mix(in oklab, var(--color-navy) 88%, transparent);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* Browsers without backdrop-filter must not get a see-through bar. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-navy {
+    background-color: color-mix(in oklab, var(--color-navy) 97%, transparent);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Safe area — iOS home indicator sits over a fixed bottom bar without this.
+--------------------------------------------------------------------------- */
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@utility mb-safe {
+  margin-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Keeps page content clear of the fixed mobile bottom bar. */
+@utility pb-bottomnav {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+
+  @media (width >= 1024px) {
+    padding-bottom: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Preloader + floating CTA keyframes
+--------------------------------------------------------------------------- */
+@keyframes apex-pop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes apex-ring {
+  0% { transform: scale(0.75); opacity: 0.7; }
+  70% { opacity: 0; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+
+@keyframes apex-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes apex-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes apex-fade-out {
+  to { opacity: 0; visibility: hidden; }
+}
+
+@keyframes apex-drawer-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes apex-sheet-in {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion
+   A single global switch. Anything animated must degrade to a readable static
+   state here, not merely slow down.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Stroke-drawn SVGs must land fully drawn, never stuck mid-draw. */
+  [data-apex-draw] {
+    stroke-dashoffset: 0 !important;
+  }
+
+  /* The preloader must disappear immediately, not animate quickly. Leaving it
+     on screen for even a moment is exactly what this preference asks against. */
+  [data-apex-preloader] {
+    display: none !important;
+  }
+}
