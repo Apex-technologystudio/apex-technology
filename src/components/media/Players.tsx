@@ -69,9 +69,12 @@ export function AmbientClip({
 /**
  * Click-to-play player for the full walkthrough.
  *
- * The <video> element is not rendered until the visitor asks for it, so a 4 MB
- * file is never fetched by someone who only scrolled past. Until then this is
- * just a poster image and a button.
+ * The <video> element is not rendered until the visitor asks for it, so the
+ * ~2.9 MB file is never fetched by someone who only scrolled past. Until then
+ * this is just a poster image and a button.
+ *
+ * The file itself carries no audio track (stripped at encode), and the element
+ * is muted as well.
  */
 export function DemoPlayer({
   src,
@@ -99,6 +102,10 @@ export function DemoPlayer({
           poster={poster}
           controls
           autoPlay
+          // Muted at the element too, not only in the file. This also keeps
+          // `autoPlay` reliable: browsers block autoplay of audible media, so
+          // an unmuted video here would silently fail to start on some setups.
+          muted
           playsInline
           preload="auto"
           className="h-full w-full"

@@ -96,9 +96,13 @@ async function buildDemo() {
   const src = path.join(SRC, DEMO.file)
   const out = path.join(OUT, 'pos-demo.mp4')
 
-  await ff(['-ss', String(DEMO.start), '-i', src,
+  // `-an` drops the audio track entirely. The master's audio measured
+  // -43.5 dB mean / -22.3 dB peak — inaudible room noise from the screen
+  // recording — and encoding it cost ~1.5 MB of a 4.4 MB file. Removing it
+  // both guarantees the demo is silent and makes the download a third smaller.
+  await ff(['-ss', String(DEMO.start), '-i', src, '-an',
     '-c:v', 'libx264', '-preset', 'medium', '-crf', '26', '-vf', 'scale=1280:-2',
-    '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '96k', '-movflags', '+faststart', out])
+    '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out])
   await report(out)
 
   await poster(src, DEMO.start + DEMO.poster, path.join(OUT, 'pos-demo-poster.webp'), 1280)

@@ -9,6 +9,7 @@ import { Footer } from '@/components/layout/Footer'
 import { BottomNav } from '@/components/layout/BottomNav'
 import { ContactDrawer } from '@/components/layout/ContactDrawer'
 import { Preloader } from '@/components/layout/Preloader'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 /**
  * Inter is the brand's primary family. Self-hosted by next/font so there is no
@@ -100,6 +101,17 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         <Preloader />
         <BottomNav />
         <ContactDrawer />
+
+        {/*
+          Vercel Speed Insights — real-user Core Web Vitals from actual
+          visitors, which is the only way to know whether the LCP/CLS work
+          holds up on Pakistani mobile connections rather than on this machine.
+          Cookieless and no visitor identifiers, but it is still measurement:
+          the privacy policy is updated to say so.
+          Requires enabling under Speed Insights in the Vercel dashboard; it is
+          inert until then and collects nothing in local development.
+        */}
+        <SpeedInsights />
 
         <script {...jsonLdProps(graph(organizationSchema(), websiteSchema()))} />
       </body>

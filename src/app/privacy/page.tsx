@@ -15,16 +15,18 @@ const BREADCRUMB = [{ name: 'Privacy Policy', path: '/privacy' }]
 
 /**
  * NOTE FOR MAINTAINERS: this policy describes the site as actually built — no
- * server-side form handling, no analytics, no cookies, no third-party embeds.
- * If analytics, a pixel, or a server-side contact endpoint is ever added, this
- * page must be updated in the same change. An inaccurate privacy policy is
+ * server-side form handling, no cookies, no advertising trackers, and exactly
+ * one measurement tool: Vercel Speed Insights (see "Page speed measurement").
+ * If another script, pixel, or a server-side contact endpoint is ever added,
+ * this page must be updated in the SAME change. An inaccurate privacy policy is
  * worse than none.
  */
 const SECTIONS = [
   {
     title: 'The short version',
     body: [
-      `This website does not set cookies, does not run analytics or advertising trackers, and has no server that stores what you type. Contact forms on this site open WhatsApp or your email app with a message already written — nothing is submitted to us until you press send in that app.`,
+      `This website sets no cookies and runs no advertising or cross-site trackers. It has no server that stores what you type: contact forms open WhatsApp or your email app with a message already written, and nothing reaches us until you press send in that app.`,
+      `We do measure page speed — how quickly pages load and respond — so we can keep the site fast on mobile connections. That measurement is described below and does not identify you.`,
     ],
   },
   {
@@ -39,6 +41,14 @@ const SECTIONS = [
     body: [
       `The enquiry form on this site runs entirely in your browser. When you submit it, it assembles your answers into a message and opens WhatsApp (or your email app) with that message prefilled. The details are not transmitted to this website or stored on any server we control.`,
       `Once you send that message, it is handled by WhatsApp or your email provider under their own privacy terms.`,
+    ],
+  },
+  {
+    title: 'Page speed measurement',
+    body: [
+      `We use Vercel Speed Insights to record how this site performs for real visitors — how long a page takes to show its main content, how quickly it responds to a tap, and whether the layout shifts while loading.`,
+      `It sets no cookies and does not create an identifier for you or follow you across other websites. What is recorded is the page address, a performance timing, and coarse technical context such as browser, device type, connection speed and country. That is not enough to identify a person, and we cannot use it to.`,
+      `We look at it for one reason: most of our visitors arrive on mobile data, and a page that is slow for them is a page that fails them. If you would rather not be measured, a browser with tracking protection or an ad blocker will stop it, and the site works exactly the same without it.`,
     ],
   },
   {

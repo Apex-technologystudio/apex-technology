@@ -95,7 +95,14 @@ Related: keyframes must not animate SVG geometry (`r`, `cx`, `width`). Those for
 - The hero video is **not fetched at all** below 768px, under `prefers-reduced-motion`, or when `saveData` is on — it is gated in an effect, not by CSS, so those cases cost zero requests
 - The hero poster is extracted from frame 0 of the *encoded loop*, not the master, so there is no visible jump on fade-in
 - Showcase clips are `preload="none"` and IntersectionObserver-gated
-- The 4 MB demo video is click-to-play — the `<video>` element does not exist until requested
+- The ~2.9 MB demo video is click-to-play — the `<video>` element does not exist until requested
+- The demo carries **no audio track at all** (stripped at encode). The source measured -43.5 dB mean / -22.3 dB peak — inaudible room noise costing ~1.5 MB. The player is muted as well, which also keeps `autoPlay` reliable, since browsers block autoplay of audible media
+
+## Analytics
+
+`@vercel/speed-insights` is mounted in the root layout. It reports real-user Core Web Vitals — the only way to know whether the LCP/CLS work holds on Pakistani mobile connections rather than on a dev machine. Enable it under **Speed Insights** in the Vercel dashboard; it is inert until then and collects nothing locally.
+
+**It is described in `/privacy`.** That page states the site runs no advertising or cross-site trackers and documents this one measurement tool explicitly. If any other script, pixel, or server-side endpoint is added, update `/privacy` in the same change — there is a maintainer note at the top of that file saying so.
 
 ---
 
