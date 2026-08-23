@@ -72,6 +72,22 @@ export const metadata: Metadata = {
   },
   category: 'technology',
   formatDetection: { telephone: true, address: false, email: true },
+
+  /*
+   * Google Search Console ownership. Emits
+   * <meta name="google-site-verification" content="..."> into every page's
+   * <head>, since this lives on the root layout.
+   *
+   * The HTML-file method is also in place at
+   * public/google3c85e5e02d549872.html. The two use different tokens and are
+   * independent, so keeping both means verification survives if either the
+   * file or the tag is ever lost. Neither should be removed after verifying —
+   * Google re-checks periodically and un-verifies the property if the proof
+   * disappears.
+   */
+  verification: {
+    google: 'adPT7aABw54sW6A-doLrzJWYaa379oHp2n2Nc2sCkO8',
+  },
 }
 
 export const viewport: Viewport = {
