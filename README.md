@@ -58,6 +58,9 @@ Nearly all copy and data is separated from layout:
 | Services pages | `src/content/services.ts` |
 | FAQ (also feeds FAQPage schema) | `src/content/faq.ts` |
 | Titles, descriptions, keyword clusters | `src/lib/seo.ts` |
+| Blog articles | `content/blog/*.md` |
+| City landing pages | `src/content/cities.ts` |
+| Comparison pages | `src/content/comparisons.ts` |
 | JSON-LD builders | `src/lib/schema.ts` |
 | Brand colours and type scale | `src/app/globals.css` (`@theme`) |
 | Mobile bottom-bar items | `src/components/layout/BottomNav.tsx` |
@@ -217,3 +220,18 @@ Measured curve (ease-out-expo, ~420ms to settle): `100% → 50% → 15% → 6% �
 Under `prefers-reduced-motion` the global block in `globals.css` collapses these durations, so both snap open instantly rather than animating slowly.
 
 Verify it with `node scripts/shoot-drawer.mjs out.png [w] [h]` — that script opens the drawer, checks validation fires, confirms the composed `wa.me` link, and asserts Escape closes it and returns focus to the trigger.
+
+
+---
+
+## Adding content
+
+**A new article:** drop a `.md` file in `content/blog/`. Required frontmatter: `title`, `description`, `date`, `answer`. Optional: `metaTitle`, `updated`, `keywords`, `related`. The route, sitemap entry, reading time and schema all follow automatically; a missing required field fails the build with the filename in the error rather than shipping a broken page.
+
+Keep `answer` a **complete, self-contained sentence**. It renders as the "Short answer" block and is the part answer engines quote.
+
+**A new city:** add an entry to `src/content/cities.ts`. Only add a city you can write about *specifically* — real commercial districts, the local retail mix, a genuine operational note. Ten templated pages are doorway pages and are penalised; six real ones rank. If you cannot write it specifically, leave it out — `areaServed` in the Organization schema already covers the whole country.
+
+**A new comparison:** add an entry to `src/content/comparisons.ts`. **Give the competing option some winning rows.** A table where one column takes every point reads as an advert and gets discounted by readers and by AI summarisers alike.
+
+Anything new should also go in the relevant `footerLinks` group in `src/lib/site.ts` — pages linked from nowhere get crawled slowly regardless of the sitemap.

@@ -2,6 +2,9 @@ import type { MetadataRoute } from 'next'
 import { site } from '@/lib/site'
 import { INDUSTRIES } from '@/content/industries'
 import { SERVICES } from '@/content/services'
+import { CITIES } from '@/content/cities'
+import { COMPARISONS } from '@/content/comparisons'
+import { getArticles } from '@/lib/blog'
 
 /**
  * Sitemap.
@@ -13,7 +16,7 @@ import { SERVICES } from '@/content/services'
  * page is genuinely regenerated on each deploy, and the alternative (a
  * hardcoded date) would go stale silently.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
   const url = (path: string) => new URL(path, site.url).toString()
 
@@ -23,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url('/pricing'), lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: url('/gym-management'), lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: url('/industries'), lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: url('/blog'), lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
     { url: url('/services'), lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: url('/about'), lastModified: now, changeFrequency: 'yearly', priority: 0.5 },
     { url: url('/contact'), lastModified: now, changeFrequency: 'yearly', priority: 0.6 },
@@ -44,5 +48,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...core, ...industries, ...services]
+  const cities: MetadataRoute.Sitemap = CITIES.map((city) => ({
+    url: url(`/pos-system/${city.slug}`),
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }))
+
+  const comparisons: MetadataRoute.Sitemap = COMPARISONS.map((c) => ({
+    url: url(`/compare/${c.slug}`),
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }))
+
+  // Articles carry their own dates, so lastModified is real here rather than
+  // the build timestamp — which is what tells a crawler an old post changed.
+  const articles: MetadataRoute.Sitemap = (await getArticles()).map((a) => ({
+    url: url(`/blog/${a.slug}`),
+    lastModified: new Date(a.updated ?? a.date),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  return [...core, ...industries, ...services, ...cities, ...comparisons, ...articles]
 }

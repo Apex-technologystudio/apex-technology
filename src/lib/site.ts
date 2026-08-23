@@ -142,6 +142,7 @@ export const navigation: Array<NavLink & { children?: NavLink[] }> = [
     ],
   },
   { href: '/pricing', label: 'Pricing' },
+  { href: '/blog', label: 'Guides' },
   { href: '/about', label: 'About' },
 ]
 
@@ -162,6 +163,17 @@ export const footerLinks = {
     { href: '/services/web-development', label: 'Web Development' },
     { href: '/services/mobile-app-development', label: 'Mobile App Development' },
     { href: '/services/custom-software', label: 'Custom Software' },
+  ],
+  guides: [
+    { href: '/blog', label: 'All guides' },
+    { href: '/compare/one-time-vs-monthly-pos-cost', label: 'One-time vs monthly' },
+    { href: '/compare/offline-vs-cloud-pos', label: 'Offline vs cloud POS' },
+  ],
+  cities: [
+    { href: '/pos-system/lahore', label: 'POS in Lahore' },
+    { href: '/pos-system/karachi', label: 'POS in Karachi' },
+    { href: '/pos-system/islamabad-rawalpindi', label: 'POS in Islamabad' },
+    { href: '/pos-system/faisalabad', label: 'POS in Faisalabad' },
   ],
   company: [
     { href: '/about', label: 'About Us' },

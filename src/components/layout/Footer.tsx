@@ -3,10 +3,20 @@ import { Logo } from '@/components/brand/Logo'
 import { footerLinks, site, whatsappLink, whatsappMessages } from '@/lib/site'
 import { MailIcon, PhoneIcon, WhatsAppIcon, LocationIcon } from '@/components/svg/Icons'
 
+/**
+ * Footer link columns.
+ *
+ * This is the site's main internal link mesh: every city, comparison and guide
+ * hub is reachable from every page. Pages that are only in the sitemap and
+ * linked from nowhere get crawled far more slowly and rank worse, so new
+ * sections belong here as well as in sitemap.ts.
+ */
 const columns = [
   { title: 'Products', links: footerLinks.products },
   { title: 'Industries', links: footerLinks.industries },
   { title: 'Services', links: footerLinks.services },
+  { title: 'Guides', links: footerLinks.guides },
+  { title: 'Cities', links: footerLinks.cities },
   { title: 'Company', links: footerLinks.company },
 ] as const
 
@@ -16,7 +26,7 @@ export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-navy text-navy-200">
       <div className="container-apex py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_2.6fr]">
+        <div className="grid gap-12 lg:grid-cols-[1fr_3fr]">
           <div className="flex flex-col gap-6">
             <Logo tone="reversed" width={200} />
             <p className="max-w-sm text-sm leading-relaxed">
@@ -62,7 +72,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
             {columns.map((column) => (
               <div key={column.title}>
                 <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-white">

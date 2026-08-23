@@ -328,3 +328,49 @@ Both clips are `preload="none"` and IntersectionObserver-gated, so they cost not
 **Also found:** the hero WebM was now *larger* than the MP4 (810 KB vs 690 KB) because the content changed from screen recording to live action — the same trap already fixed for the showcase clips. Hero WebM dropped.
 
 **Verified:** build (25 routes), `tsc`, `eslint`, links, SEO audit all clean; no horizontal overflow at 360/390/768. Media total ~11 MB.
+
+
+---
+
+## 19. Content & search expansion — 24 Aug 2026
+
+Brief: rank for what the business does, including in AI answer engines. Everything except connecting the real domain.
+
+**Built** — 15 new routes, 25 → 40 total:
+
+- **Blog** at `/blog` + `/blog/[slug]`. Markdown with frontmatter, read at build time. Markdown rather than MDX deliberately: MDX needs bundler config that can drift with Turbopack, and nothing here executes JSX. `BlogPosting` + `Blog` + breadcrumb schema, related-article linking.
+- **Six articles** — POS pricing, offline vs cloud, udhaar management, kiryana buying checklist, POS hardware, rent-vs-own cost.
+- **Two comparison pages** at `/compare/[slug]`.
+- **Six city pages** at `/pos-system/[city]`.
+
+**Every article opens with a "Short answer" block.** A reader who only wants the answer gets it without scrolling, and answer engines quote a direct, self-contained statement far more readily than a paragraph needing context. Research confirms LLMs cite only 2-7 sources per answer versus Google's 10 links — a smaller surface, winnable on specific questions.
+
+### Deliberate decisions
+
+**No `llms.txt`.** Google's John Mueller confirmed no major AI service consumes it, and an Ahrefs study across 137,000 domains found 97% received zero requests. Building one would have been visible effort with no effect.
+
+**Six city pages, not ten.** A set of near-identical pages differing only by a find-and-replace on the city name is what Google classifies as *doorway pages*, and it is penalised. Each page therefore carries real local substance — actual commercial districts (Hall Road, Jodia Bazar, Raja Bazar, the Ghanta Ghar bazaars, Hussain Agahi, Karkhano), the retail mix that dominates there, and a city-specific operational note. A city that cannot be written about specifically does not get a page; `areaServed` still covers the rest of the country.
+
+**City pages emit `Service` schema, not `LocalBusiness`.** There is no branch address in these cities, and claiming a physical presence that does not exist is false and a common cause of manual actions.
+
+**Comparison tables award rows to the competing option.** Both tables mark the subscription/cloud column as the winner on several rows. A comparison where one column takes every point reads as advertising and is discounted by readers and by the engines summarising it.
+
+**No FBR article.** Still the largest keyword left on the table, still blocked on confirmation that the product actually integrates.
+
+### Verification
+
+`next build` 40/40 routes · `tsc` · `eslint` clean · every link resolves · **SEO audit passes across all 29 audited routes** after trimming four descriptions that exceeded 160 characters · no horizontal overflow at 360/390 · sitemap grew 16 → 32 URLs, all derived from the same content arrays that generate the pages.
+
+Footer gained **Guides** and **Cities** columns — pages that live only in a sitemap and are linked from nowhere get crawled slowly and rank worse.
+
+### What the client still has to do
+
+Ranking is not only a code problem. In order of impact:
+
+1. **Connect `apextechnology.pk`** — a `.vercel.app` subdomain will not rank for commercial terms
+2. **Google Business Profile** — highest ROI for Pakistani local search, and free
+3. **Real reviews** from installed customers
+4. **Citations** — Pakistani directories, listings, LinkedIn
+5. **Keep publishing** — the compounding part
+
+Realistic: long-tail traffic 3-6 months, competitive head terms 12+.
