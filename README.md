@@ -29,7 +29,17 @@ Other scripts:
 
 Set **`NEXT_PUBLIC_SITE_URL`** to the real domain (e.g. `https://apextechnology.pk`).
 
-Canonical URLs, `sitemap.xml`, `robots.txt` and all JSON-LD absolute URLs are derived from it. If it is wrong, every SEO tag on the site is wrong. It falls back to `https://apextechnology.pk` for local builds — see `src/lib/site.ts`.
+Canonical URLs, `sitemap.xml`, `robots.txt` and all JSON-LD absolute URLs are derived from it. If it is wrong, every SEO tag on the site is wrong.
+
+Resolution order (`src/lib/site.ts`):
+
+1. `NEXT_PUBLIC_SITE_URL` — set this to the real domain
+2. Vercel's own production hostname, injected automatically
+3. `https://apextechnology.pk` — local builds only
+
+**Set it to a domain you actually control.** `.vercel.app` subdomains are globally unique and first-come; `apex-technology.vercel.app` belongs to an unrelated project. Pointing this variable at it made every canonical tag credit a stranger's site and caused Google to reject all 17 sitemap URLs with "URL not allowed". Step 2 exists so a *missing* variable falls back to the real deployment instead of a wrong guess — but a *wrong* value still overrides everything, so verify it.
+
+Verify after deploying: `curl https://<your-domain>/sitemap.xml` — the hosts inside must match the domain you fetched it from.
 
 On Vercel: Project → Settings → Environment Variables.
 

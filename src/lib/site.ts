@@ -9,6 +9,22 @@
 /** Digits only, country code first — the format wa.me requires. */
 const WHATSAPP_DIGITS = '923357583554'
 
+/** Vercel supplies these as bare hostnames, with no scheme. */
+function vercelUrl(host?: string): string | undefined {
+  return host ? `https://${host}` : undefined
+}
+
+/**
+ * Strips a trailing slash and any accidental whitespace.
+ *
+ * `new URL(path, origin)` treats a trailing slash as significant, so
+ * "https://x.pk/" and "https://x.pk" can produce different canonical strings
+ * for the same page — enough to split ranking signals between two URLs.
+ */
+function normaliseOrigin(value: string): string {
+  return value.trim().replace(/\/+$/, '')
+}
+
 export const site = {
   name: 'APEX TECHNOLOGY',
   /** Used where all-caps would shout, e.g. mid-sentence in body copy. */
@@ -19,11 +35,28 @@ export const site = {
     'Offline POS software for Pakistani shops — billing, inventory, udhaar and real profit. One-time PKR 30,000, no monthly fee. Free demo: 0335 7583554',
 
   /**
-   * Set NEXT_PUBLIC_SITE_URL in the deployment environment. The fallback keeps
-   * local builds working; canonical URLs and the sitemap both read from this,
-   * so a wrong value here silently produces wrong SEO tags.
+   * Canonical origin. Canonicals, the sitemap, robots and every absolute URL
+   * in the JSON-LD read from this, so a wrong value here silently points
+   * search engines at the wrong site.
+   *
+   * Resolution order, most to least specific:
+   *   1. NEXT_PUBLIC_SITE_URL      - set this to the real domain in production.
+   *   2. Vercel's own production URL - injected automatically, so a forgotten
+   *      env var still yields THIS deployment rather than a guess.
+   *   3. The placeholder domain    - local builds only.
+   *
+   * Step 2 exists because of a real incident: NEXT_PUBLIC_SITE_URL was set to
+   * a `.vercel.app` subdomain that turned out to belong to an unrelated
+   * project. Every canonical then pointed at a stranger's site and Google
+   * rejected all 17 sitemap URLs as "URL not allowed". Falling back to the
+   * deployment's own hostname makes that failure mode impossible.
    */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://apextechnology.pk',
+  url: normaliseOrigin(
+    process.env.NEXT_PUBLIC_SITE_URL ||
+      vercelUrl(process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL) ||
+      vercelUrl(process.env.NEXT_PUBLIC_VERCEL_URL) ||
+      'https://apextechnology.pk',
+  ),
 
   email: 'apextechnologies2125@gmail.com',
   phoneDisplay: '+92 335 7583554',
