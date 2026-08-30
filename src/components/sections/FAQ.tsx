@@ -16,14 +16,17 @@ export function FAQ({
   title = 'Questions people ask before buying',
   description,
   eyebrow = 'FAQ',
+  tone = 'white',
 }: {
   faqs: Faq[]
   title?: string
   description?: string
   eyebrow?: string
+  /** Lets a page alternate section tones without changing every other page. */
+  tone?: 'white' | 'mist'
 }) {
   return (
-    <Section tone="white" id="faq">
+    <Section tone={tone} id="faq">
       <Container>
         <SectionHeading eyebrow={eyebrow} title={title} description={description} />
 

@@ -374,3 +374,48 @@ Ranking is not only a code problem. In order of impact:
 5. **Keep publishing** — the compounding part
 
 Realistic: long-tail traffic 3-6 months, competitive head terms 12+.
+
+
+---
+
+## 20. Content & structure upgrade — 24 Aug 2026
+
+Brief: make the site a 10/10 through content, section order, messaging and conversion flow. **No visual redesign.** Colours, fonts, nav, footer, buttons, cards, spacing, animations, shadows and components all unchanged.
+
+### The problem with the old home page
+
+16 sections that read as a list rather than an argument, and five of them were product/video blocks saying overlapping things. Features said "fast barcode billing", then *At the counter* said it again. Features said "your real profit", then *Know your numbers* said it again. "No monthly fee" was made five separate times.
+
+### New order — problem → solution → proof → fit → price → trust → questions → ask
+
+Hero · Trust strip · **Problems** · Features · Demo · How it works · **Built for Pakistan** · In real shops · **Business types** · **Demo nudge** · Pricing · **Why trust us** · **Also from Apex** · FAQ · Contact
+
+### Removed rather than rewritten
+
+- *At the counter* and *Know your numbers* → moved to `/pos-system`, where that depth belongs
+- Rent-vs-own comparison → `/pricing` and `/compare` only
+- Gym teaser + Services grid → one compact "Also from Apex" block
+- `KhataStory.tsx` and `GymTeaser` deleted — dead code is a liability in a repo that gets handed on
+
+Result: **12,948px tall against 14,466px before** — shorter despite four new sections.
+
+### Content changes
+
+- **Hero** now says what the product *is* before its differentiators. Paragraph cut from four lines to two. CTAs standardised to **Book a Free Demo** / **See How It Works**.
+- **Features rewritten benefit-first**: "Know your stock at a glance", not "Inventory Management". The module name means nothing to someone deciding whether this helps their shop.
+- **Simple English throughout** — short sentences, familiar words. The reader is comfortable in basic-to-intermediate English and is on a phone.
+- **Business types expanded 4 → 9**, all supported by verified capabilities (per-unit and per-kilo items, IMEI, categories, name search).
+- **FAQ rewritten** around the questions a shopkeeper actually asks, including "can I use it on multiple computers?" — answered honestly: one licence, one computer.
+- Generic "Learn more" replaced with specific CTAs.
+
+### Trust section, no invention
+
+`TESTIMONIALS` ships **empty**. Fake reviews and "500+ customers" counters are the normal filler and are both dishonest and detectable — Google issues manual actions for fake review markup. The section stands on four *true* trust points (free demo, published price, installation included, licence survives non-renewal); the quote block renders only once real attributable testimonials are added.
+
+### One design-adjacent change, and why
+
+Reordering left three white sections adjacent, merging them into one undifferentiated block. Section tones were resequenced so each reads as its own step — **same three brand tones, no new colours**. Fixing that rhythm is part of doing the reorder properly, not a redesign.
+
+### Verification
+
+Build 40/40 · `tsc` · `eslint` clean · every link resolves · SEO audit passes on all 29 audited routes · no horizontal overflow at 360/390 · no console errors.

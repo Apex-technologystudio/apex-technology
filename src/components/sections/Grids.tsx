@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import { Container, Section, SectionHeading } from '@/components/ui/Section'
 import { Reveal } from '@/components/ui/Reveal'
-import { ButtonAnchor, ButtonLink } from '@/components/ui/Button'
-import { PhoneFrame } from '@/components/media/Players'
-import { ArrowRightIcon, GymIcon, WhatsAppIcon, CheckIcon } from '@/components/svg/Icons'
+import { ButtonAnchor } from '@/components/ui/Button'
+import { ArrowRightIcon, WhatsAppIcon } from '@/components/svg/Icons'
 import { INDUSTRIES } from '@/content/industries'
 import { SERVICES } from '@/content/services'
 import { WHY_APEX } from '@/content/pos'
@@ -94,7 +93,7 @@ export function ServicesGrid({ tone = 'white' }: { tone?: 'white' | 'mist' }) {
                   {service.summary}
                 </p>
                 <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-cyan-700">
-                  Learn more
+                  See what we build
                   <ArrowRightIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </Link>
@@ -106,58 +105,10 @@ export function ServicesGrid({ tone = 'white' }: { tone?: 'white' | 'mist' }) {
   )
 }
 
-/** Home-page teaser for the second product. */
-export function GymTeaser() {
-  return (
-    <Section tone="white">
-      <Container>
-        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
-          <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full bg-mist px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-cyan-700">
-              <GymIcon className="h-4 w-4" />
-              Also from Apex
-            </span>
-            <h2 className="mt-5 text-h2 text-navy">Running a gym instead of a shop?</h2>
-            <p className="mt-5 text-lg leading-relaxed text-navy-600">
-              Apex Gym handles members, attendance and dues with the same idea behind it —
-              installed on your own machine, no monthly fee, and built for how gyms in Pakistan
-              actually collect and chase payments.
-            </p>
-            <ul className="mt-7 flex flex-col gap-3">
-              {[
-                'Member records and membership status',
-                'Daily attendance marking and history',
-                'Dues tracking so nobody trains for free',
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-[0.95rem] text-navy-700">
-                  <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-cyan-600" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <ButtonLink href="/gym-management" variant="ghost" size="lg" className="mt-8">
-              See Apex Gym
-              <ArrowRightIcon className="h-4 w-4" />
-            </ButtonLink>
-          </Reveal>
-
-          <Reveal direction="left" className="mx-auto w-full max-w-[280px] lg:mx-0 lg:ml-auto">
-            <PhoneFrame
-              src="/media/clip-01.mp4"
-              poster="/media/clip-01-poster.webp"
-              alt="The Apex Gym dashboard showing member management and attendance"
-            />
-          </Reveal>
-        </div>
-      </Container>
-    </Section>
-  )
-}
-
 /** Closing call to action, reused across pages. */
 export function ContactCTA({
   title = 'Tell us about your shop',
-  description = 'Send us a message on WhatsApp and we will show you the software, answer your questions, and give you a straight price. No pressure and no charge for the demo.',
+  description = 'Message us on WhatsApp and we will show you the software, answer your questions and give you a straight price. The demo is free and there is no obligation.',
   message = whatsappMessages.general,
 }: {
   title?: string
@@ -187,7 +138,7 @@ export function ContactCTA({
               shine
             >
               <WhatsAppIcon className="h-5 w-5" />
-              Message on WhatsApp
+              Book a Free Demo
             </ButtonAnchor>
             <ButtonAnchor
               href={site.phoneHref}
@@ -220,8 +171,8 @@ export function PricingPreview({ children }: { children: React.ReactNode }) {
       <Container>
         <SectionHeading
           eyebrow="Pricing"
-          title="Pay once. It's yours."
-          description="Three packages between PKR 30,000 and PKR 80,000. No monthly fee, and the first year of support is included with all of them."
+          title="Pay once. It is yours."
+          description="Three packages between PKR 30,000 and PKR 80,000. Installation, training and the first year of support are included in every one."
         />
         <div className="mt-14">{children}</div>
       </Container>

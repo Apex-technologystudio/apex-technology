@@ -42,9 +42,9 @@ export function HowItWorks() {
     <Section tone="mist">
       <Container>
         <SectionHeading
-          eyebrow="How a sale works"
-          title="Scan, bill, print — and it has already updated everything"
-          description="No separate stock register, no end-of-day reconciliation ritual. One pass at the counter keeps inventory, profit and your backup current."
+          eyebrow="How it works"
+          title="One sale, four steps"
+          description="No separate stock register and no counting up at closing time. Billing one sale updates everything else for you."
         />
 
         <div className="relative mt-16">

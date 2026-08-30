@@ -28,15 +28,12 @@ const SHOWCASE = [
 
 export function Showcase() {
   return (
-    <Section tone="navy" className="overflow-hidden">
-      <div aria-hidden="true" className="absolute inset-0 bg-grid opacity-[0.05]" />
-
+    <Section tone="mist" className="overflow-hidden">
       <Container className="relative">
         <SectionHeading
-          tone="dark"
-          eyebrow="Apex POS in the field"
-          title="Built for the shops it runs in"
-          description="Retail counters, pharmacies and supermarkets across Pakistan — the same software, set up for how each of them works."
+          eyebrow="In real shops"
+          title="Working in shops like yours"
+          description="Retail counters, pharmacies and supermarkets — the same software, set up for what each one sells."
         />
 
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -47,8 +44,8 @@ export function Showcase() {
                   <PhoneFrame src={item.src} poster={item.poster} alt={item.alt} />
                 </div>
                 <figcaption className="text-center">
-                  <h3 className="text-h3 text-white">{item.title}</h3>
-                  <p className="mt-1.5 text-[0.95rem] text-navy-200">{item.caption}</p>
+                  <h3 className="text-h3 text-navy">{item.title}</h3>
+                  <p className="mt-1.5 text-[0.95rem] text-navy-600">{item.caption}</p>
                 </figcaption>
               </figure>
             </Reveal>

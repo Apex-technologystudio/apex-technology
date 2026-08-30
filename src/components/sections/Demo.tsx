@@ -14,9 +14,9 @@ export function Demo() {
       <Container className="relative">
         <SectionHeading
           tone="dark"
-          eyebrow="See it running"
-          title="The whole system, start to finish"
-          description="A real walkthrough of Apex POS — billing a sale, adding stock, taking a split payment, and reading the day's profit. No slides, no mockups."
+          eyebrow="Product walkthrough"
+          title="See Apex POS in action"
+          description="A recording of the real software: billing a sale, adding stock, taking a split payment and checking the day's profit. Not a mockup."
         />
 
         <div className="mt-14 grid items-start gap-10 lg:grid-cols-[1.65fr_1fr]">
@@ -30,7 +30,7 @@ export function Demo() {
 
           <Reveal delay={0.12} className="flex flex-col gap-6">
             <div className="rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm">
-              <h3 className="text-h3 text-white">On the dashboard, at a glance</h3>
+              <h3 className="text-h3 text-white">What you see when you open it</h3>
               <ul className="mt-5 flex flex-col gap-3">
                 {DASHBOARD_METRICS.map((metric) => (
                   <li key={metric} className="flex items-start gap-3 text-[0.95rem] text-navy-100">
@@ -47,8 +47,8 @@ export function Demo() {
             <div className="rounded-2xl border border-cyan/25 bg-cyan/10 p-7">
               <p className="text-[0.975rem] leading-relaxed text-navy-100">
                 Want to see it with <strong className="font-semibold text-white">your own
-                products</strong> in it? We&apos;ll set up a demo on a screen share and answer
-                whatever you want to ask.
+                products</strong> in it? We will set it up on a screen share and answer
+                anything you want to ask.
               </p>
               <ButtonAnchor
                 href={whatsappLink(whatsappMessages.demo)}
@@ -58,7 +58,7 @@ export function Demo() {
                 className="mt-5 w-full"
               >
                 <WhatsAppIcon className="h-4 w-4" />
-                Book a free demo
+                Book a Free Demo
               </ButtonAnchor>
             </div>
           </Reveal>

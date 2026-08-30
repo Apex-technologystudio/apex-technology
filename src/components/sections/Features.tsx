@@ -4,12 +4,12 @@ import { POS_FEATURES } from '@/content/pos'
 
 export function Features() {
   return (
-    <Section tone="white" id="features">
+    <Section tone="mist" id="features">
       <Container>
         <SectionHeading
-          eyebrow="What Apex POS does"
-          title="Everything the counter needs, and nothing it doesn't"
-          description="Nine things your shop deals with every day, handled on one screen — built from how Pakistani shops actually run, not translated from someone else's market."
+          eyebrow="What you get"
+          title="Everything your shop needs, in one place"
+          description="Nine things you deal with every day, handled on one screen."
         />
 
         <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-navy-100 bg-navy-100 sm:grid-cols-2 lg:grid-cols-3">

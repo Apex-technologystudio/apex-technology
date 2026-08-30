@@ -9,15 +9,29 @@ import {
   SplitPaymentIcon,
   UdhaarIcon,
   GearIcon,
+  StoreIcon,
+  SupermarketIcon,
+  MobileIcon,
+  PharmacyIcon,
+  RestaurantIcon,
+  CodeIcon,
 } from '@/components/svg/Icons'
 
 /**
- * Apex POS feature copy.
+ * Apex POS content.
  *
- * Every entry here describes behaviour observed in the product walkthrough
- * (see docs/PLAN.md §1). Nothing is aspirational — if a capability could not be
- * confirmed on screen it is not claimed, because a POS buyer will test these
- * during the demo and a wrong claim costs the sale.
+ * Two rules govern everything in this file:
+ *
+ * 1. **Only verified capabilities.** Every claim describes behaviour observed in
+ *    the product walkthrough (docs/PLAN.md §1). A POS buyer tests these during
+ *    the demo, so a wrong claim costs the sale.
+ * 2. **Written for a shopkeeper, not a CMO.** Short sentences, familiar words,
+ *    plain business terms. The reader is comfortable in basic to intermediate
+ *    English and is reading on a phone.
+ *
+ * Feature headings state the BENEFIT, not the module name — "Know your stock at
+ * a glance", not "Inventory Management". The module name means nothing to
+ * someone deciding whether this helps their shop.
  */
 export type Feature = {
   icon: typeof BarcodeIcon
@@ -28,108 +42,178 @@ export type Feature = {
 export const POS_FEATURES: Feature[] = [
   {
     icon: BarcodeIcon,
-    title: 'Fast barcode billing',
+    title: 'Bill customers in seconds',
     description:
-      'Scan or search, set quantity, and the item is in the cart. The running subtotal and your profit on that sale both stay visible while you bill.',
+      'Scan the barcode or type a few letters. The item, price and stock come up straight away, so the queue keeps moving.',
   },
   {
     icon: InventoryIcon,
-    title: 'Inventory that matches reality',
+    title: 'Know your stock at a glance',
     description:
-      'Track items by unit or by kilogram, with purchase price, selling price and profit per item. Low-stock and out-of-stock counts sit on the dashboard.',
+      'See what you have, what is running low and what is finished — without checking shelves or keeping notebooks.',
   },
   {
     icon: UdhaarIcon,
-    title: 'Udhaar without the register',
+    title: 'Never lose track of udhaar',
     description:
-      'Every customer balance in one list — who owes what, since when, and the total outstanding. Mark as paid when they settle.',
+      'Every customer balance in one list: who owes you, how much, and since when. Mark it paid when they settle.',
   },
   {
     icon: ProfitIcon,
-    title: 'Your real profit, not just sales',
+    title: 'See your real profit, not just sales',
     description:
-      'Rent, salaries, electricity and internet are entered once as fixed expenses, then subtracted automatically to show true net profit for the month.',
+      'Rent, salaries and bills are entered once. Apex subtracts them, so the profit you see is money you actually keep.',
   },
   {
     icon: SplitPaymentIcon,
-    title: 'Cash, JazzCash, EasyPaisa, bank, card',
+    title: 'Take payment any way customers pay',
     description:
-      'Take one payment or split a single sale across several methods. Every transaction is logged with its reference so the day reconciles.',
+      'Cash, JazzCash, EasyPaisa, bank transfer or card. One sale can even be split across two methods.',
   },
   {
     icon: ReceiptIcon,
-    title: 'Thermal receipts, saved',
+    title: 'Print receipts and keep every bill',
     description:
-      'Print to a thermal printer and keep every bill. Search saved receipts by date, customer or product, reprint any of them, or export to CSV.',
+      'Print on a thermal printer and save a copy. Find any old bill later by date, customer or product.',
   },
   {
     icon: RolesIcon,
-    title: 'Staff see sales, not margins',
+    title: 'Staff can bill without seeing your margins',
     description:
-      'Worker accounts run the counter while purchase prices, profit and financial reports stay behind a separate password only you have.',
+      'Workers get their own login. Your purchase prices, profit and reports stay behind a separate password.',
   },
   {
     icon: BackupIcon,
-    title: 'Backs itself up',
+    title: 'Your data is saved automatically',
     description:
-      'The database is copied to a folder you choose, automatically, every two hours. Restoring from a backup file takes one click.',
+      'Apex copies your records to a folder you choose every two hours. If the computer fails, you restore in one click.',
   },
   {
     icon: OfflineIcon,
-    title: 'No internet, no problem',
+    title: 'Works with no internet',
     description:
-      'Apex POS is installed on your own computer, not rented from a website. Load-shedding and dead connections do not stop you from billing.',
+      'Apex runs on your own computer. Load-shedding and connection problems do not stop you from serving customers.',
   },
 ]
 
-/** The dashboard figures the software surfaces at a glance. */
-export const DASHBOARD_METRICS = [
-  'Today’s sales and revenue',
-  'Stock cost vs stock worth',
-  'Low stock and out of stock counts',
-  'Revenue over the last 7 days',
-  'Sales split by payment method',
-  'Today’s, expected and weekly profit',
+/**
+ * The problem section.
+ *
+ * Deliberately describes the shop's day, not the software. A visitor who
+ * recognises their own situation here reads the rest of the page differently.
+ */
+export const SHOP_PROBLEMS = [
+  {
+    problem: 'Billing by hand takes too long',
+    detail: 'Writing every item slows the counter down when the shop is busy.',
+  },
+  {
+    problem: 'Stock records are hard to keep',
+    detail: 'Registers go out of date, and you find out an item finished when a customer asks for it.',
+  },
+  {
+    problem: 'Udhaar is difficult to track',
+    detail: 'You remember the big names, but the total is hard to know and old balances get forgotten.',
+  },
+  {
+    problem: 'You cannot see your daily profit',
+    detail: 'Sales are easy to count. What you actually earned after rent, salaries and bills is not.',
+  },
+  {
+    problem: 'Small staff mistakes cost money',
+    detail: 'A wrong price or a missed entry is hard to find later when nothing is recorded properly.',
+  },
+  {
+    problem: 'Online systems stop when internet stops',
+    detail: 'If the software needs a connection, a dead router means you cannot bill at all.',
+  },
 ] as const
 
-/** The four steps a sale actually passes through, used by the flow diagram. */
-export const POS_FLOW = [
-  {
-    step: '01',
-    title: 'Scan',
-    description: 'Scan the barcode or type the name. Stock and price come up instantly.',
-  },
-  {
-    step: '02',
-    title: 'Bill',
-    description: 'Add to cart, take cash or a wallet payment, split it if needed.',
-  },
-  {
-    step: '03',
-    title: 'Print',
-    description: 'Thermal receipt for the customer, saved copy for your records.',
-  },
-  {
-    step: '04',
-    title: 'Backed up',
-    description: 'Stock, profit and expenses update, and the database copies itself.',
-  },
-] as const
-
-export const WHY_APEX = [
+/**
+ * Why the product suits this market specifically.
+ *
+ * Each point is a real local condition matched to a real capability — not
+ * "we understand Pakistan", which any vendor can type.
+ */
+export const BUILT_FOR_PAKISTAN = [
   {
     icon: OfflineIcon,
-    title: 'Works offline',
-    description: 'Installed on your PC. Bills through load-shedding and dead internet.',
+    title: 'Built to work offline',
+    description:
+      'Load-shedding and weak internet are normal here. Apex runs on your own computer, so billing never stops.',
+  },
+  {
+    icon: UdhaarIcon,
+    title: 'Udhaar is a proper feature',
+    description:
+      'Most shops here sell on credit. Apex treats customer balances as a main screen, not something added on later.',
+  },
+  {
+    icon: SplitPaymentIcon,
+    title: 'JazzCash and EasyPaisa included',
+    description:
+      'Record payments the way your customers actually pay, and see how much came in by each method.',
+  },
+  {
+    icon: InventoryIcon,
+    title: 'Sell by kilo or by piece',
+    description:
+      'Rice, pulses and sugar are sold by weight. Apex handles per-kilogram items next to packaged goods.',
+  },
+  {
+    icon: ReceiptIcon,
+    title: 'Thermal receipt printing',
+    description:
+      'Works with the same thermal printers already used in shops across Pakistan.',
   },
   {
     icon: GearIcon,
-    title: 'One-time price',
-    description: 'Pay once from PKR 30,000. No monthly rent for your own till.',
+    title: 'Support in Urdu',
+    description:
+      'The software is in English, but our training and support are in Urdu — on WhatsApp, when you need it.',
   },
-  {
-    icon: BackupIcon,
-    title: 'Your data stays yours',
-    description: 'The database sits on your machine and backs up to your folder.',
-  },
+] as const
+
+/**
+ * Business types.
+ *
+ * Everything listed is supported by capabilities we verified: per-unit and
+ * per-kilogram items, IMEI tracking, categories, barcode or name search. Types
+ * with a dedicated page link to it; the rest link to the product page rather
+ * than to thin pages created only to have a link.
+ */
+export const BUSINESS_TYPES = [
+  { icon: StoreIcon, name: 'General stores', note: 'Kiryana shops with long stock lists and udhaar customers.', href: '/industries/retail' },
+  { icon: SupermarketIcon, name: 'Super stores', note: 'Busy counters, per-kilo items and several payment methods.', href: '/industries/supermarket' },
+  { icon: MobileIcon, name: 'Mobile shops', note: 'IMEI recorded per handset, so every unit is traceable.', href: '/pos-system' },
+  { icon: PharmacyIcon, name: 'Pharmacies', note: 'Thousands of items, found by typing a few letters.', href: '/industries/pharmacy' },
+  { icon: RestaurantIcon, name: 'Restaurants & cafes', note: 'Quick order billing and split payments at the table.', href: '/industries/restaurant' },
+  { icon: InventoryIcon, name: 'Garments', note: 'Stock by category, so you can see what sold this season.', href: '/pos-system' },
+  { icon: ReceiptIcon, name: 'Bakeries', note: 'Items sold by weight or by piece, billed the same way.', href: '/pos-system' },
+  { icon: GearIcon, name: 'Hardware stores', note: 'Long catalogues searched by name instead of barcode.', href: '/pos-system' },
+  { icon: CodeIcon, name: 'Electronics & cosmetics', note: 'Serial numbers, purchase price and profit tracked per item.', href: '/pos-system' },
+] as const
+
+/** The dashboard figures the software shows at a glance. */
+export const DASHBOARD_METRICS = [
+  'Today’s sales and revenue',
+  'Stock cost and stock worth',
+  'Low stock and finished items',
+  'Sales for the last 7 days',
+  'How much came in by each payment method',
+  'Today’s profit and this month’s profit',
+] as const
+
+/** The four steps of a sale, used by the flow diagram. */
+export const POS_FLOW = [
+  { step: '01', title: 'Scan', description: 'Scan the barcode or type the name. Price and stock appear.' },
+  { step: '02', title: 'Bill', description: 'Add to cart and take payment — cash, wallet, bank or card.' },
+  { step: '03', title: 'Print', description: 'Print the receipt. A copy is saved for your records.' },
+  { step: '04', title: 'Saved', description: 'Stock, profit and expenses update, and your data backs up.' },
+] as const
+
+export const WHY_APEX = [
+  { icon: OfflineIcon, title: 'Works offline', description: 'Runs on your PC. Keeps billing during load-shedding.' },
+  { icon: GearIcon, title: 'Pay once', description: 'From PKR 30,000 one time. No monthly fee, ever.' },
+  { icon: BackupIcon, title: 'Your data stays yours', description: 'Everything is stored on your own computer.' },
 ] as const

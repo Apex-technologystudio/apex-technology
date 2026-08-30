@@ -15,7 +15,7 @@ import {
 const PROOF = [
   { icon: OfflineIcon, label: 'Works without internet' },
   { icon: SplitPaymentIcon, label: 'JazzCash, EasyPaisa & cash' },
-  { icon: BackupIcon, label: 'Automatic local backup' },
+  { icon: BackupIcon, label: 'Automatic backup' },
 ] as const
 
 export function Hero() {
@@ -76,14 +76,13 @@ export function Hero() {
         </span>
 
         <h1 className="mt-6 max-w-4xl text-display font-extrabold text-white">
-          POS software for Pakistani shops.{' '}
-          <span className="text-cyan">Works offline.</span> No monthly fee.
+          Complete POS software for{' '}
+          <span className="text-cyan">Pakistani businesses</span>
         </h1>
 
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100 md:text-xl">
-          Apex POS runs billing, inventory, udhaar and your real daily profit on one screen —
-          installed on your own computer, so it keeps working when the internet and the
-          electricity don&apos;t. One-time price from{' '}
+          Manage billing, stock, udhaar, staff and daily profit from one simple system.
+          Installed on your own computer. One-time price from{' '}
           <strong className="font-semibold text-white">PKR 30,000</strong>.
         </p>
 
@@ -97,14 +96,14 @@ export function Hero() {
             shine
           >
             <WhatsAppIcon className="h-5 w-5" />
-            Book a free demo
+            Book a Free Demo
           </ButtonAnchor>
           <ButtonLink
-            href="/pos-system"
+            href="#demo"
             size="lg"
             className="border border-white/25 bg-white/5 text-white backdrop-blur-sm hover:border-cyan/60 hover:bg-white/10"
           >
-            See what it does
+            See How It Works
             <ArrowRightIcon className="h-4 w-4" />
           </ButtonLink>
         </div>
