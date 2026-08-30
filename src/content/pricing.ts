@@ -1,10 +1,23 @@
 /**
  * Apex POS packages.
  *
- * DRAFT PACKAGING — the PKR 30,000-80,000 band is confirmed by the client, but
- * which features sit in which tier is a commercial decision they still need to
- * sign off (see docs/PLAN.md §13). The feature strings themselves are all
- * verified capabilities; only their distribution across tiers is provisional.
+ * APPROVED by APEX TECHNOLOGY on 31 Aug 2026 — prices, tier names and the
+ * split of features across tiers are all signed off. This is no longer draft
+ * packaging.
+ *
+ * The client was asked to confirm three points specifically before approving,
+ * so treat these as deliberate rather than accidental:
+ *
+ *  1. Udhaar, expenses/net profit, JazzCash and EasyPaisa, and worker accounts
+ *     are Business-tier and above — not included in Starter.
+ *  2. Per-kilogram items and IMEI tracking are Enterprise-only.
+ *  3. Enterprise includes ON-SITE installation and training. Every other tier
+ *     is remote. This is a promise customers will hold the business to, so it
+ *     must not be added to another tier without the client saying so.
+ *
+ * This file is the single source for the pricing page, the home preview, the
+ * rent-vs-own comparison and the Offer JSON-LD, so a price can never disagree
+ * with itself across the site. Change it here and everywhere follows.
  */
 
 export type Tier = {

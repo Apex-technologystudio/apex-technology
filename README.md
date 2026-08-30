@@ -154,7 +154,7 @@ node scripts/shoot.mjs /pricing shot.png 1440 1100
 See `docs/PLAN.md` §13. In short:
 
 1. **Set `NEXT_PUBLIC_SITE_URL`** to the real domain
-2. **Confirm package contents** — the PKR 30/55/80k prices are confirmed, but which features sit in which tier is provisional
+2. ~~Confirm package contents~~ — **approved 31 Aug 2026**. Prices, tier names and the feature split are all signed off; see the header comment in `src/content/pricing.ts` for the three points confirmed explicitly
 3. **No FBR POS integration is claimed anywhere.** It is a high-volume Pakistani search term; only add it if it is genuinely true
 4. **No testimonials, client logos or client-count statistics exist.** Nothing was invented — supply real ones to add them
 5. Apex Gym copy is deliberately conservative, describing only what was verifiable

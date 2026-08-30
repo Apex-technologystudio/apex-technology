@@ -220,7 +220,7 @@ One-time licence + optional yearly support/updates. Three tiers spanning PKR 30,
 ### Still outstanding for the client
 
 1. **`NEXT_PUBLIC_SITE_URL`** must be set to the real domain before deploy.
-2. **Package contents are provisional.** The PKR 30/55/80k prices are confirmed; which features sit in which tier needs commercial sign-off.
+2. ~~Package contents are provisional.~~ **Resolved 31 Aug 2026** — client approved the prices, tier names and feature split, including that udhaar/expenses/wallet payments/worker accounts are Business and above, per-kg and IMEI are Enterprise-only, and Enterprise includes on-site installation.
 3. **No FBR POS integration is claimed.** High-volume search term — add only if genuinely true.
 4. **No testimonials, client logos or client-count statistics.** None were invented; supply real ones to add them.
 5. **Apex Gym copy is conservative**, covering only what was verifiable from one frame of footage.
