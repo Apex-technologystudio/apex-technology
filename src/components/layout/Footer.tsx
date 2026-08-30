@@ -1,7 +1,14 @@
 import Link from 'next/link'
 import { Logo } from '@/components/brand/Logo'
 import { footerLinks, site, whatsappLink, whatsappMessages } from '@/lib/site'
-import { MailIcon, PhoneIcon, WhatsAppIcon, LocationIcon } from '@/components/svg/Icons'
+import {
+  MailIcon,
+  PhoneIcon,
+  WhatsAppIcon,
+  LocationIcon,
+  FacebookIcon,
+  InstagramIcon,
+} from '@/components/svg/Icons'
 
 /**
  * Footer link columns.
@@ -19,6 +26,11 @@ const columns = [
   { title: 'Cities', links: footerLinks.cities },
   { title: 'Company', links: footerLinks.company },
 ] as const
+
+const SOCIAL_ICONS: Record<string, typeof FacebookIcon> = {
+  Facebook: FacebookIcon,
+  Instagram: InstagramIcon,
+}
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -69,6 +81,29 @@ export function Footer() {
                 <LocationIcon className="h-4 w-4 shrink-0" />
                 Serving all of {site.country}
               </li>
+            </ul>
+
+            {/* Social profiles. rel="me" states that these belong to the same
+                entity as this site — the markup counterpart of `sameAs` in the
+                Organization JSON-LD. */}
+            <ul className="flex items-center gap-3">
+              {site.socials.map((social) => {
+                const Icon = SOCIAL_ICONS[social.name]
+                if (!Icon) return null
+                return (
+                  <li key={social.name}>
+                    <a
+                      href={social.url}
+                      target="_blank"
+                      rel="me noopener noreferrer"
+                      aria-label={`${site.name} on ${social.name}`}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 text-navy-200 transition-colors hover:border-cyan/50 hover:bg-white/5 hover:text-cyan"
+                    >
+                      <Icon className="h-[1.05rem] w-[1.05rem]" />
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </div>
 

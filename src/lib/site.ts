@@ -78,6 +78,29 @@ export const site = {
 
   country: 'Pakistan',
   currency: 'PKR',
+
+  /**
+   * Official social profiles.
+   *
+   * These are emitted as `sameAs` in the Organization JSON-LD, which is how a
+   * search engine confirms that this website and those profiles are the same
+   * business rather than three unrelated things with a similar name. That is
+   * worth more than the footer icons.
+   *
+   * The Instagram URL is stored without its `?igsi=` parameter: that is a
+   * share-attribution token from whoever copied the link, and publishing it
+   * both looks untidy and gives two URLs for one profile.
+   */
+  socials: [
+    {
+      name: 'Facebook',
+      url: 'https://www.facebook.com/people/Apex-Technologies/61593351534349/',
+    },
+    {
+      name: 'Instagram',
+      url: 'https://www.instagram.com/apex_technologyy',
+    },
+  ],
 } as const
 
 /**

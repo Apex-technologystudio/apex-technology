@@ -34,6 +34,10 @@ export function organizationSchema() {
     // the visitor before they ever click through.
     priceRange: 'PKR 30,000 - PKR 80,000',
     knowsLanguage: ['en', 'ur'],
+    // Links this site to the same business's social profiles. Search engines
+    // use it to consolidate an entity, so brand signals are not split across
+    // separate unconnected properties.
+    sameAs: site.socials.map((s) => s.url),
     email: site.email,
     telephone: site.phoneDisplay,
     address: {
