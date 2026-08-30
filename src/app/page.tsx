@@ -23,9 +23,9 @@ import { faqSchema, graph, jsonLdProps, posProductSchema, videoSchema } from '@/
 export const metadata: Metadata = pageMeta({
   // Home carries no brand name: the keyword and the price do more work in a
   // SERP than a company nobody is searching for yet.
-  title: 'POS Software Pakistan — PKR 30,000 One-Time, No Monthly Fee',
+  title: 'Offline POS Software Pakistan — PKR 30,000, No Monthly Fee',
   description:
-    'Complete POS software for Pakistani businesses: billing, stock, udhaar, staff and daily profit. Works offline. One-time PKR 30,000. Free demo: 0335 7583554',
+    'Offline POS software for shops in Pakistan — a POS application installed on your own computer. Billing, stock, udhaar and profit. One-time PKR 30,000.',
   path: '/',
   keywords: [...KEYWORDS.core, ...KEYWORDS.problem, ...KEYWORDS.trades],
 })

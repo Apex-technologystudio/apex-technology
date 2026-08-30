@@ -26,7 +26,7 @@ import {
 export const metadata: Metadata = pageMeta({
   title: 'Best POS Software in Pakistan — Offline, One-Time PKR 30,000',
   description:
-    'Barcode billing, inventory, udhaar ledger, expenses and real profit. Works with no internet. One-time from PKR 30,000, no monthly fee. Free demo: 0335 7583554',
+    'Offline POS for shops in Pakistan — a POS application on your own PC. Barcode billing, stock, udhaar and profit. One-time from PKR 30,000. Call 0335 7583554',
   path: '/pos-system',
   keywords: [...KEYWORDS.core, ...KEYWORDS.problem, ...KEYWORDS.payments, ...KEYWORDS.trades],
 })
@@ -40,7 +40,7 @@ export default function PosSystemPage() {
         eyebrow="Apex POS"
         breadcrumb={BREADCRUMB}
         title="POS software for Pakistani shops, built to run offline"
-        description="Billing, inventory, udhaar, expenses and profit — installed on your own Windows PC. Buy it once from PKR 30,000 and it keeps working whether or not the internet does."
+        description="Apex POS is offline POS software for shops in Pakistan — a POS application installed on your own Windows PC. Billing, stock, udhaar, expenses and profit. Buy it once from PKR 30,000 and it keeps working whether or not the internet does."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <ButtonAnchor

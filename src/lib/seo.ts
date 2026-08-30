@@ -38,6 +38,20 @@ export const KEYWORDS = {
   core: [
     'POS system in Pakistan',
     'POS software Pakistan',
+    'POS in Pakistan',
+    'offline POS',
+    'offline POS software',
+    'POS for shop',
+    'POS software for shop',
+    'POS system for shop in Pakistan',
+    // "POS application on system" — people searching this want software
+    // installed on a computer, not a web login. Covering the phrasings they
+    // actually type, all of which describe what this product genuinely is.
+    'POS application',
+    'POS application for PC',
+    'POS software for computer',
+    'desktop POS software Pakistan',
+    'POS software for laptop',
     'POS system price in Pakistan',
     'POS software price in Pakistan',
     'best POS software in Pakistan',
@@ -88,6 +102,16 @@ export const KEYWORDS = {
     'fitness centre software Pakistan',
   ],
   services: [
+    // Budget-led phrasing. Targeted honestly: the pages say we agree a fixed
+    // price before starting and invite a budget conversation — they never
+    // quote a figure we have not been given.
+    'web development in low budget',
+    'low budget website Pakistan',
+    'affordable web development Pakistan',
+    'affordable website design Pakistan',
+    'cheap website design Pakistan',
+    'budget website development Pakistan',
+    'small business website Pakistan',
     'web development company Pakistan',
     'website design company Pakistan',
     'mobile app development Pakistan',

@@ -37,6 +37,16 @@ export const POS_FAQS: Faq[] = [
       'Apex POS ki qeemat PKR 30,000 se shuru hoti hai. Business package PKR 55,000 aur Enterprise package PKR 80,000 ka hai. Yeh one-time payment hai — koi monthly fee nahi. Installation, training aur pehle saal ki support included hai.',
   },
   {
+    question: 'Is Apex POS an application installed on my computer?',
+    answer:
+      'Yes. Apex POS is a POS application that installs on your own Windows PC or laptop — it is not a website you log into. That is why it keeps working with no internet, and why your sales and customer data stay on your machine rather than on a company server somewhere else.',
+  },
+  {
+    question: 'Do you have POS software for a small shop?',
+    answer:
+      'Yes. The Starter package at PKR 30,000 is built for a single counter — barcode billing, stock, receipts and the daily dashboard. Many small shops never need more than that. If you later add a second counter or want udhaar and full reports, you can move up without starting again.',
+  },
+  {
     question: 'Which businesses can use Apex POS?',
     answer:
       'General stores, super stores, mobile shops, pharmacies, restaurants and cafes, garments, bakeries, hardware stores, cosmetics and electronics shops. Items can be sold by piece or by kilogram, and mobile shops can record an IMEI number for each handset.',
@@ -118,5 +128,10 @@ export const COMPANY_FAQS: Faq[] = [
     question: 'How can I get a demo?',
     answer:
       'Message us on WhatsApp at +92 335 7583554. We will walk you through the software on a screen share, answer your questions, and give you a straight price. There is no charge for the demo or the quote.',
+  },
+  {
+    question: 'Can you build a website on a low budget?',
+    answer:
+      'Often, yes. We agree a fixed price before any work starts, so tell us your budget and we will tell you honestly what it covers. A small starter site built properly — fast, mobile-friendly and able to be found on Google — costs far less than a large one, and it can be extended later without rebuilding it.',
   },
 ]

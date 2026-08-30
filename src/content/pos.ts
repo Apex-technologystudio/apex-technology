@@ -92,7 +92,7 @@ export const POS_FEATURES: Feature[] = [
     icon: OfflineIcon,
     title: 'Works with no internet',
     description:
-      'Apex runs on your own computer. Load-shedding and connection problems do not stop you from serving customers.',
+      'Apex POS is an application installed on your own computer, not a website. Load-shedding and connection problems do not stop you from serving customers.',
   },
 ]
 
@@ -140,7 +140,7 @@ export const BUILT_FOR_PAKISTAN = [
     icon: OfflineIcon,
     title: 'Built to work offline',
     description:
-      'Load-shedding and weak internet are normal here. Apex runs on your own computer, so billing never stops.',
+      'Load-shedding and weak internet are normal here. Offline POS software on your own system means billing never stops.',
   },
   {
     icon: UdhaarIcon,

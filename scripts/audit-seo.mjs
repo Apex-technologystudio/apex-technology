@@ -39,6 +39,7 @@ const ROUTES = [
   '/blog/kiryana-store-pos-checklist',
   '/blog/pos-hardware-for-a-small-shop',
   '/blog/one-time-vs-monthly-pos-cost',
+  '/blog/website-on-a-low-budget-pakistan',
   '/compare/one-time-vs-monthly-pos-cost',
   '/compare/offline-vs-cloud-pos',
   '/pos-system/lahore',

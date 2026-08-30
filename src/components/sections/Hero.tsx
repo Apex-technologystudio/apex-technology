@@ -82,7 +82,7 @@ export function Hero() {
 
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100 md:text-xl">
           Manage billing, stock, udhaar, staff and daily profit from one simple system.
-          Installed on your own computer. One-time price from{' '}
+          An offline POS application installed on your own computer. One-time price from{' '}
           <strong className="font-semibold text-white">PKR 30,000</strong>.
         </p>
 

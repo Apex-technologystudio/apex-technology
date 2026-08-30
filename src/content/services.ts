@@ -50,12 +50,12 @@ export const SERVICES: Service[] = [
     title: 'Web Development',
     navLabel: 'Web Development',
     icon: CodeIcon,
-    metaTitle: 'Web Development Company in Pakistan — Business Websites',
+    metaTitle: 'Affordable Web Development in Pakistan — Fixed Price',
     metaDescription:
-      'Fast, search-friendly business websites and web apps built in Pakistan. Fixed scope and fixed price agreed up front. Get a quote: 0335 7583554',
+      'Business websites built in Pakistan on a fixed price agreed before we start. Working to a small budget? Tell us the number: 0335 7583554',
     summary: 'Business sites and web apps that load fast and get found.',
     intro:
-      'A business website has two jobs: be found by people searching, and make it easy for them to get in touch. We build sites that do both, and that stay quick on a mobile connection.',
+      'A business website has two jobs: be found by people searching, and make it easy for them to get in touch. We build sites that do both, stay quick on a mobile connection, and cost what we said they would.',
     deliverables: [
       'Business and product websites',
       'Landing pages built around a search term',
@@ -63,12 +63,18 @@ export const SERVICES: Service[] = [
       'Search engine optimisation from the first line of markup',
       'Performance work — Core Web Vitals, image and video handling',
       'Content updates you can make yourself',
+      'Small starter sites for a tight budget, built to grow later',
     ],
     process: SHARED_PROCESS,
     keywords: [
+      'web development in low budget',
+      'low budget website Pakistan',
+      'affordable web development Pakistan',
+      'affordable website design Pakistan',
+      'cheap website design Pakistan',
       'web development company Pakistan',
       'website design Pakistan',
-      'business website Pakistan',
+      'small business website Pakistan',
     ],
   },
   {
