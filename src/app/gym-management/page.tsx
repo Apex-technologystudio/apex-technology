@@ -4,7 +4,7 @@ import { PageHero } from '@/components/sections/PageHero'
 import { ContactCTA } from '@/components/sections/Grids'
 import { Container, Section, SectionHeading } from '@/components/ui/Section'
 import { Reveal } from '@/components/ui/Reveal'
-import { PhoneFrame } from '@/components/media/Players'
+import { AmbientClip } from '@/components/media/Players'
 import { ButtonAnchor } from '@/components/ui/Button'
 import {
   BackupIcon,
@@ -106,12 +106,14 @@ export default function GymManagementPage() {
                 description="Gyms rarely fail on training. They fail on lapsed memberships nobody chased, attendance nobody recorded, and dues nobody tracked."
               />
             </Reveal>
-            <Reveal direction="left" className="mx-auto w-full max-w-[280px] lg:ml-auto">
-              <PhoneFrame
-                src="/media/clip-01.mp4"
-                poster="/media/clip-01-poster.webp"
-                alt="The Apex Gym dashboard showing member management and today's attendance"
-              />
+            <Reveal direction="left" className="w-full lg:ml-auto">
+              <figure className="relative aspect-video w-full overflow-hidden rounded-2xl border border-navy-100 shadow-[0_28px_70px_-30px_rgba(7,26,46,0.55)]">
+                <AmbientClip
+                  src="/media/story-gym.mp4"
+                  poster="/media/story-gym-poster.webp"
+                  alt="A gym owner moving from a paper attendance register to member and attendance dashboards"
+                />
+              </figure>
             </Reveal>
           </div>
 

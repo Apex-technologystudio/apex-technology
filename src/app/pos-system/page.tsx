@@ -92,13 +92,24 @@ export default function PosSystemPage() {
             faqSchema(POS_FAQS),
             breadcrumbSchema(BREADCRUMB),
             videoSchema({
-              name: 'Apex POS — full software walkthrough',
+              name: 'Apex POS walkthrough (English)',
               description:
-                'A complete walkthrough of Apex POS: billing a sale, managing inventory, taking split payments, tracking udhaar, and reading daily profit reports.',
-              thumbnail: '/media/pos-demo-poster.webp',
-              contentUrl: '/media/pos-demo.mp4',
-              uploadDate: '2026-08-23',
-              duration: 'PT2M7S',
+                'A narrated walkthrough of Apex POS in English: billing a sale, adding stock, checking stock levels and reading daily profit reports.',
+              thumbnail: '/media/demo-english-poster.webp',
+              contentUrl: '/media/demo-english.mp4',
+              uploadDate: '2026-08-30',
+              duration: 'PT58S',
+              inLanguage: 'en-PK',
+            }),
+            videoSchema({
+              name: 'Apex POS walkthrough (Urdu)',
+              description:
+                'Apex POS ka mukammal walkthrough Urdu mein: billing, stock, aur rozana profit reports.',
+              thumbnail: '/media/demo-urdu-poster.webp',
+              contentUrl: '/media/demo-urdu.mp4',
+              uploadDate: '2026-08-30',
+              duration: 'PT58S',
+              inLanguage: 'ur-PK',
             }),
           ),
         )}

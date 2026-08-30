@@ -43,8 +43,27 @@ const SECTION_CLIPS = [
   { id: 'reports-clip', file: 'reports-master.mp4', start: 3, duration: 9, width: 960 },
 ]
 
-/** Full walkthrough, trimmed past the desktop + login intro. */
-const DEMO = { file: 'pos-demo-master.mp4', start: 22, poster: 12 }
+/**
+ * Narrated product walkthrough, recorded twice: once in English, once in Urdu.
+ *
+ * These replaced a 127-second silent screen recording. Shorter, explained out
+ * loud, higher-resolution source, and it opens in a spreadsheet rather than on
+ * a Windows desktop, so nothing personal is on screen.
+ *
+ * AUDIO IS KEPT HERE, unlike everywhere else in this pipeline. The old demo's
+ * audio was inaudible room noise and was stripped; this is narration and is the
+ * entire point of the file. Do not add `-an` to these.
+ */
+const DEMOS = [
+  { id: 'demo-english', file: 'demo-english-master.mp4', poster: 20 },
+  { id: 'demo-urdu', file: 'demo-urdu-master.mp4', poster: 20 },
+]
+
+/** Short story clips: the problem, then the product. Silent, used as b-roll. */
+const STORY_CLIPS = [
+  { id: 'story-mobileshop', file: 'story-mobileshop-master.mp4', width: 430 },
+  { id: 'story-gym', file: 'story-gym-master.mp4', width: 860 },
+]
 
 const ff = (args) => run(ffmpegPath, ['-y', '-hide_banner', '-loglevel', 'error', ...args])
 
@@ -92,20 +111,54 @@ async function buildHero() {
 }
 
 async function buildDemo() {
-  console.log('\n▸ Full POS demo')
-  const src = path.join(SRC, DEMO.file)
-  const out = path.join(OUT, 'pos-demo.mp4')
+  console.log('\n▸ Narrated walkthroughs')
+  for (const demo of DEMOS) {
+    const src = path.join(SRC, demo.file)
+    const out = path.join(OUT, `${demo.id}.mp4`)
 
-  // `-an` drops the audio track entirely. The master's audio measured
-  // -43.5 dB mean / -22.3 dB peak — inaudible room noise from the screen
-  // recording — and encoding it cost ~1.5 MB of a 4.4 MB file. Removing it
-  // both guarantees the demo is silent and makes the download a third smaller.
-  await ff(['-ss', String(DEMO.start), '-i', src, '-an',
-    '-c:v', 'libx264', '-preset', 'medium', '-crf', '26', '-vf', 'scale=1280:-2',
-    '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out])
-  await report(out)
+    // Scale to 1280 wide first, then crop the bottom 52px. That strip is the
+    // Windows taskbar (plus a few pixels of its top edge), and the recorder
+    // "created with" watermark into the same corner. Neither belongs on a
+    // product demo, and cropping is lossless for the software itself — the
+    // app's own status bar sits above the cut.
+    //
+    // Cropping height only, never width, so no part of the UI is lost. The
+    // result is 1280x650; NarratedDemo sets a matching aspect ratio so the
+    // frame is never stretched to fit a 16:9 box.
+    //
+    // Audio deliberately retained — this is narration. AAC 128k because a
+    // voice track at 96k on a 1440p downscale picked up noticeable artefacts.
+    await ff(['-i', src,
+      '-c:v', 'libx264', '-preset', 'medium', '-crf', '26',
+      '-vf', 'scale=1280:-2,crop=1280:650:0:0',
+      '-pix_fmt', 'yuv420p', '-profile:v', 'main',
+      '-c:a', 'aac', '-b:a', '128k', '-ac', '2',
+      '-movflags', '+faststart', out])
+    await report(out)
 
-  await poster(src, DEMO.start + DEMO.poster, path.join(OUT, 'pos-demo-poster.webp'), 1280)
+    // Poster from the cropped output, so the still matches frame-for-frame
+    // and the watermark cannot reappear in the thumbnail.
+    await ff(['-ss', String(demo.poster), '-i', out, '-frames:v', '1',
+      '-quality', '80', path.join(OUT, `${demo.id}-poster.webp`)])
+    await report(path.join(OUT, `${demo.id}-poster.webp`))
+  }
+}
+
+async function buildStory() {
+  console.log('\n▸ Story clips')
+  for (const clip of STORY_CLIPS) {
+    const src = path.join(SRC, clip.file)
+    const out = path.join(OUT, `${clip.id}.mp4`)
+
+    // Silent: these run as ambient loops behind copy, and a second audio track
+    // competing with the narrated demo would be hostile.
+    await ff(['-i', src, '-an', '-c:v', 'libx264', '-preset', 'slow', '-crf', '30',
+      '-g', '50', '-vf', `scale=${clip.width}:-2`, '-pix_fmt', 'yuv420p',
+      '-profile:v', 'main', '-movflags', '+faststart', out])
+    await report(out)
+
+    await poster(out, 0, path.join(OUT, `${clip.id}-poster.webp`), clip.width)
+  }
 }
 
 async function buildClips() {
@@ -148,7 +201,7 @@ async function buildSections() {
   }
 }
 
-const TASKS = { hero: buildHero, demo: buildDemo, clips: buildClips, sections: buildSections }
+const TASKS = { hero: buildHero, demo: buildDemo, clips: buildClips, sections: buildSections, story: buildStory }
 
 async function main() {
   const which = process.argv[2] ?? 'all'
@@ -159,7 +212,7 @@ async function main() {
 
   const jobs = which === 'all' ? Object.values(TASKS) : [TASKS[which]]
   if (!jobs[0]) {
-    console.error(`Unknown task "${which}". Use: hero | demo | clips | sections | all`)
+    console.error(`Unknown task "${which}". Use: hero | demo | clips | sections | story | all`)
     process.exit(1)
   }
   for (const job of jobs) await job()

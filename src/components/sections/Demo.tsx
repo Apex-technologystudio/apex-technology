@@ -1,6 +1,6 @@
 import { Container, Section, SectionHeading } from '@/components/ui/Section'
 import { Reveal } from '@/components/ui/Reveal'
-import { DemoPlayer } from '@/components/media/Players'
+import { NarratedDemo } from '@/components/media/NarratedDemo'
 import { ButtonAnchor } from '@/components/ui/Button'
 import { whatsappLink, whatsappMessages } from '@/lib/site'
 import { WhatsAppIcon } from '@/components/svg/Icons'
@@ -16,16 +16,12 @@ export function Demo() {
           tone="dark"
           eyebrow="Product walkthrough"
           title="See Apex POS in action"
-          description="A recording of the real software: billing a sale, adding stock, taking a split payment and checking the day's profit. Not a mockup."
+          description="One minute of the real software, explained out loud — in English or Urdu. Billing a sale, adding stock, checking stock levels and reading your profit."
         />
 
         <div className="mt-14 grid items-start gap-10 lg:grid-cols-[1.65fr_1fr]">
           <Reveal>
-            <DemoPlayer
-              src="/media/pos-demo.mp4"
-              poster="/media/pos-demo-poster.webp"
-              label="Watch the full walkthrough"
-            />
+            <NarratedDemo />
           </Reveal>
 
           <Reveal delay={0.12} className="flex flex-col gap-6">

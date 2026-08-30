@@ -61,9 +61,9 @@ export function Problems() {
 
           <Reveal direction="left" className="mx-auto w-full max-w-[260px] lg:mx-0">
             <PhoneFrame
-              src="/media/clip-03.mp4"
-              poster="/media/clip-03-poster.webp"
-              alt="A shopkeeper writing in a paper khata register"
+              src="/media/story-mobileshop.mp4"
+              poster="/media/story-mobileshop-poster.webp"
+              alt="A mobile shop owner working from a paper register, then using a point of sale terminal"
             />
           </Reveal>
         </div>

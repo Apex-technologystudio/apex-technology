@@ -158,6 +158,7 @@ export function videoSchema({
   contentUrl,
   uploadDate,
   duration,
+  inLanguage,
 }: {
   name: string
   description: string
@@ -165,6 +166,8 @@ export function videoSchema({
   contentUrl: string
   uploadDate: string
   duration: string
+  /** BCP-47 tag. Lets an Urdu narration surface as an Urdu-language result. */
+  inLanguage?: string
 }) {
   return {
     '@type': 'VideoObject',
@@ -174,6 +177,7 @@ export function videoSchema({
     contentUrl: absolute(contentUrl),
     uploadDate,
     duration,
+    inLanguage: inLanguage ?? 'en-PK',
     publisher: { '@id': ORGANIZATION_ID },
   }
 }

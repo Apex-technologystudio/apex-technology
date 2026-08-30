@@ -22,6 +22,10 @@ Regenerate with `npm run media` (or `npm run media:hero`). Encoder settings live
 | `clip-06.mp4` | `WhatsApp Video 2026-08-21 at 5.57.08 PM.mp4` | 478×850 | 0:26 | 5.7 MB |
 | `counter-master.mp4` | `4524439-uhd_3840_2160_25fps.mp4` | **3840×2160** | 0:18 | 55.5 MB |
 | `reports-master.mp4` | `6602061-hd_1920_1080_30fps.mp4` | **1280×720** — *not* 1920×1080 as the filename claims | 0:23 | 4.4 MB |
+| `demo-english-master.mp4` | `WhatsApp Video 2026-08-30 at 9.30.06 PM.mp4` | 1280×720 | 0:58 | 12.2 MB |
+| `demo-urdu-master.mp4` | `WhatsApp Video 2026-08-30 at 9.38.40 PM.mp4` | 2560×1440 | 0:58 | 65.4 MB |
+| `story-mobileshop-master.mp4` | `WhatsApp Video 2026-08-30 at 9.25.00 PM.mp4` | 478×850 | 0:24 | 5.5 MB |
+| `story-gym-master.mp4` | `WhatsApp Video 2026-08-30 at 9.25.46 PM.mp4` | 848×478 | 0:40 | 8.5 MB |
 
 ---
 
@@ -35,8 +39,11 @@ Regenerate with `npm run media` (or `npm run media:hero`). Encoder settings live
 | `counter-clip-poster.webp` / `reports-clip-poster.webp` | frame 0 of each encoded clip | 960 wide | ~15–20 KB | Section posters |
 | `hero-poster.webp` | **frame 0 of `hero-loop.mp4`** | 1280 wide | 40 KB | Hero LCP element |
 | `hero-poster.jpg` | same | q4 fallback | 90 KB | Fallback |
-| `pos-demo.mp4` | `pos-demo-master.mp4` from 22s | H.264 720p CRF 26 + AAC 96k | 4.4 MB | Demo player |
-| `pos-demo-poster.webp` | master @ 34s | 1280 wide | 30 KB | Demo poster, VideoObject thumbnail |
+| `demo-english.mp4` | `demo-english-master.mp4` | H.264 **1280×650** CRF 26 + **AAC 128k** | 2.5 MB | Demo player, English |
+| `demo-urdu.mp4` | `demo-urdu-master.mp4` | H.264 **1280×650** CRF 26 + **AAC 128k** | 2.5 MB | Demo player, Urdu |
+| `demo-*-poster.webp` | frame @ 20s of each **encoded** file | 1280 wide | 60 KB | Posters, VideoObject thumbnails |
+| `story-mobileshop.mp4` | `story-mobileshop-master.mp4` | H.264 430 wide CRF 30, silent | 1.1 MB | Problems section |
+| `story-gym.mp4` | `story-gym-master.mp4` | H.264 860 wide CRF 30, silent | 2.3 MB | `/gym-management` |
 | `clip-0N.mp4` | `clip-0N.mp4` | H.264 430 wide CRF 30, silent | 0.3–1.1 MB | Phone frames |
 | `clip-0N-poster.webp` | frame @ 3s | 430 wide | ~25 KB | Clip posters |
 
@@ -83,3 +90,22 @@ The six clips are AI-generated marketing footage, portrait 9:16, so they are fra
 | `reports-master` | Hands reviewing charts on a tablet, card reader on the desk | "Know your numbers" |
 
 **Caveat on `reports-master`:** it shows a *tablet*, and Apex POS is Windows-desktop only. The section using it carries an explicit footnote saying it runs on the shop's own PC and there is no separate tablet or phone app, so the imagery cannot imply a product capability that does not exist.
+
+
+---
+
+## The narrated demos (30 Aug 2026)
+
+Two recordings of the same 59-second walkthrough, one narrated in English and one in Urdu. They replaced a 127-second silent screen recording: shorter, explained out loud, higher-resolution source, and they open in a spreadsheet rather than on a Windows desktop.
+
+**Audio is kept on these two files and nowhere else.** The old demo's audio measured −43.5 dB — inaudible room noise — and was stripped. This is narration and is the entire point of the file. **Do not add `-an` to the demo encode.** The player passes `muted={false}` for the same reason.
+
+**Both are cropped to 1280×650**, removing the bottom 70px. That strip held the Windows taskbar *and* a "created with ElevenLabs" watermark that the narration tool burned into the bottom-right corner. A first attempt cropping 52px left a visible sliver of taskbar icons; 70px cuts cleanly at the application's own status bar. Height is cropped but **never width**, so no part of the UI is lost — and `NarratedDemo` sets `aspect-[128/65]` so the frame is never stretched back into a 16:9 box.
+
+Posters are taken from the **encoded, cropped** output, so the watermark cannot reappear in a thumbnail.
+
+If the watermark is removed at source later (a paid ElevenLabs plan), re-record and the crop can be reduced or dropped — change `crop=1280:650:0:0` and the matching `aspect-[128/65]` together.
+
+### Files deliberately left unused
+
+Three clips from 30 Aug sit in `_source-media/video/unused/`. They show a dashboard UI that is **not Apex POS** — different design, and amounts denominated in **US dollars** (`$234.55`, `$5,506`, `$518.00`). Presenting them as the product would be a fabricated screenshot, and dollar figures would mislead Pakistani buyers.

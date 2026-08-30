@@ -81,31 +81,45 @@ export function DemoPlayer({
   poster,
   label,
   className,
+  /**
+   * Narrated video must not be muted — the commentary is the point. Silent
+   * screen recordings pass `muted` so a stray audio track cannot surprise
+   * anyone. Autoplay with sound is allowed here because play only ever starts
+   * from the visitor's own click, which counts as the required user gesture.
+   */
+  muted = false,
+  /**
+   * Aspect ratio of the source. Defaults to 16:9, but the narrated demos are
+   * cropped to 1280x668 to remove the taskbar and the recorder's watermark, and
+   * forcing those into a 16:9 box would stretch the UI.
+   */
+  aspect = 'aspect-video',
 }: {
   src: string
   poster: string
   label: string
   className?: string
+  muted?: boolean
+  aspect?: string
 }) {
   const [playing, setPlaying] = useState(false)
 
   return (
     <div
       className={cn(
-        'group relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-navy-900 shadow-2xl',
+        'group relative w-full overflow-hidden rounded-2xl border border-white/10 bg-navy-900 shadow-2xl',
+        aspect,
         className,
       )}
     >
       {playing ? (
         <video
+          key={src}
           src={src}
           poster={poster}
           controls
           autoPlay
-          // Muted at the element too, not only in the file. This also keeps
-          // `autoPlay` reliable: browsers block autoplay of audible media, so
-          // an unmuted video here would silently fail to start on some setups.
-          muted
+          muted={muted}
           playsInline
           preload="auto"
           className="h-full w-full"
